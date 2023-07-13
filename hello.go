@@ -3,18 +3,21 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 	"time"
 )
 
-const delay = 3
-const monitorar = 3
+const delay = 5
+const monitorar = 2
 
 func main() {
 
 	exibeIntroducao()
-	lerArquivo()
 
 	for {
 
@@ -27,6 +30,7 @@ func main() {
 			monitorandSite()
 		case 2:
 			fmt.Println("Exibindo Logs...")
+			imprimeLogs()
 		case 0:
 			fmt.Println("Saindo do programa...")
 			os.Exit(0)
@@ -38,7 +42,7 @@ func main() {
 	}
 }
 func exibeIntroducao() {
-	versao := 1.1
+	versao := 2.0
 	fmt.Println("Olá usuario seja bem vindo, versão atual é", versao)
 	fmt.Println(" ")
 }
@@ -59,7 +63,6 @@ func lerComando() int {
 }
 func monitorandSite() {
 	fmt.Println("Monitorando...")
-	//sites := []string{"https://www.alura.com.br", "http://www.random-status-code.herokuapp.com/", "https://www.caelum.com.br"}
 	sites := lerArquivo()
 
 	for i := 0; i < monitorar; i++ {
@@ -83,23 +86,49 @@ func testaSite(site string) {
 	}
 	if resp.StatusCode == 200 {
 		fmt.Println("O site", site, "Foi carregado com sucesso!")
+		registraLog(site, true)
 	} else {
 		fmt.Println("O site", site, "Esta com problemas!")
+		registraLog(site, false)
 	}
 }
 
 func lerArquivo() []string {
 
-	var sites []string
+	var site []string
 
 	arquivo, err := os.Open("site.txt")
-
 	if err != nil {
 		fmt.Println("Ocorreu um erro", err)
 	}
 
 	leitor := bufio.NewReader(arquivo)
-	leitor.ReadString('\n')
-	return sites
+	for {
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha)
+		site = append(site, linha)
+		if err == io.EOF {
+			break
+		}
+	}
+	arquivo.Close()
+	return site
+}
+func registraLog(site string, status bool) {
 
+	arquivo, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	arquivo.WriteString(time.Now().Format("02/01/2006 15:04:05 ") + "-" + site + "- ESTAVA: " + strconv.FormatBool(status) + "\n")
+
+	arquivo.Close()
+}
+func imprimeLogs() {
+	arquivo, err := ioutil.ReadFile("log.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(arquivo))
 }

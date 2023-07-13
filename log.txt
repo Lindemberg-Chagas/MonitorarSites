@@ -1,0 +1,16 @@
+13/07/2023 13:55:41 -https://www.alura.com.br- ESTAVA: true
+13/07/2023 13:55:42 -http://www.random-status-code.herokuapp.com/- ESTAVA: false
+13/07/2023 13:55:42 -https://www.caelum.com.br- ESTAVA: true
+13/07/2023 13:55:42 -https://www.casadocodigo.com.br- ESTAVA: true
+13/07/2023 13:55:47 -https://www.alura.com.br- ESTAVA: true
+13/07/2023 13:55:47 -http://www.random-status-code.herokuapp.com/- ESTAVA: false
+13/07/2023 13:55:48 -https://www.caelum.com.br- ESTAVA: true
+13/07/2023 13:55:48 -https://www.casadocodigo.com.br- ESTAVA: true
+13/07/2023 14:15:47 -https://www.alura.com.br- ESTAVA: true
+13/07/2023 14:15:48 -http://www.random-status-code.herokuapp.com/- ESTAVA: false
+13/07/2023 14:15:48 -https://www.caelum.com.br- ESTAVA: true
+13/07/2023 14:15:49 -https://www.casadocodigo.com.br- ESTAVA: true
+13/07/2023 14:15:54 -https://www.alura.com.br- ESTAVA: true
+13/07/2023 14:15:54 -http://www.random-status-code.herokuapp.com/- ESTAVA: false
+13/07/2023 14:15:54 -https://www.caelum.com.br- ESTAVA: true
+13/07/2023 14:15:54 -https://www.casadocodigo.com.br- ESTAVA: true
